@@ -1,0 +1,42 @@
+ App.jsx  
+import Blog from "./Blog";
+
+function App() {
+  return <Blog />;
+}
+
+export default App;
+
+  Blog.jsx
+  import { useState } from "react";
+
+function Blog() {
+  const [comment, setComment] = useState("");
+  const [comments, setComments] = useState([]);
+
+  const addComment = () => {
+    if (!comment.trim()) return;
+    setComments([...comments, comment]);
+    setComment("");
+  };
+
+  return (
+    <div style={{ maxWidth: "700px", margin: "auto", padding: "20px" }}>
+      <h2>Blog Title</h2>
+      <p>This is a responsive blog layout.</p>
+
+      <input
+        value={comment}
+        onChange={(e) => setComment(e.target.value)}
+        placeholder="Add comment"
+      />
+      <button onClick={addComment}>Post</button>
+
+      <ul>
+        {comments.map((c, i) => <li key={i}>{c}</li>)}
+      </ul>
+    </div>
+  );
+}
+
+export default Blog;
